@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "url": "https://developer.chrome.com/docs/extensions"
+      }
+    },
+    "condition": {
+      "urlFilter": "||example.com",
+      "resourceTypes": ["main_frame"]
+    }
+  }
+]

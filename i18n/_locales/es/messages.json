@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "Internacionalización",
+    "description": "The name of the extension."
+  },
+  "extDescription": {
+    "message": "Muestra texto en el idioma del navegador con chrome.i18n.",
+    "description": "The description of the extension."
+  },
+  "greeting": {
+    "message": "¡Hola! Este texto se adapta al idioma de tu navegador.",
+    "description": "Greeting shown in the popup."
+  }
+}

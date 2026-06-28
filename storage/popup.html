@@ -9,15 +9,41 @@
       font-family: Arial, sans-serif;
       text-align: center;
     }
+
+    input {
+      width: 90%;
+      padding: 6px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin: 6px 2px 0;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    #saved {
+      margin-top: 12px;
+      padding: 8px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      min-height: 18px;
+      word-break: break-word;
+    }
   </style>
 </head>
 
 <body>
-  <h1>Settings</h1>
-  <label>
-    <input type="checkbox" id="someSetting" />
-    Some setting
-  </label>
+  <h1>Storage</h1>
+  <p>Save a note with <code>chrome.storage.local</code>. The box below updates
+    on its own through the <code>onChanged</code> event.</p>
+  <input type="text" id="value" placeholder="Type something..." />
+  <div>
+    <button id="save">Save</button>
+    <button id="remove">Remove</button>
+  </div>
+  <div id="saved"></div>
   <script src="popup.js"></script>
 </body>
 

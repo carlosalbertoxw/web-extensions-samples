@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body {
+      width: 320px;
+      font-family: Arial, sans-serif;
+      padding: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    #status {
+      color: #34a853;
+      font-size: 13px;
+      height: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Options</h1>
+  <p>This is the extension's dedicated options page. The browser shows it on the
+    <code>chrome://extensions</code> details and via "Open options".</p>
+
+  <label>
+    Theme:
+    <select id="theme">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </label>
+
+  <label>
+    <input type="checkbox" id="notifications" />
+    Enable notifications
+  </label>
+
+  <button id="save">Save</button>
+  <p id="status"></p>
+
+  <script src="options.js"></script>
+</body>
+
+</html>

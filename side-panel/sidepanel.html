@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 16px;
+    }
+
+    h1 {
+      font-size: 1.3em;
+    }
+
+    ul {
+      padding-left: 18px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Side panel</h1>
+  <p>This UI lives in the browser's side panel and stays open while you browse,
+    unlike a popup.</p>
+
+  <h2>Quick notes</h2>
+  <textarea id="notes" rows="6" style="width: 100%"></textarea>
+  <p><button id="save">Save notes</button></p>
+  <p id="status" style="color:#34a853;"></p>
+
+  <script src="sidepanel.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+#cs-sample-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background-color: #1a73e8;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#cs-sample-bar strong {
+  margin-right: auto;
+}
+
+#cs-sample-bar button {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  background-color: #fff;
+  color: #1a73e8;
+  font-size: 13px;
+}
+
+#cs-sample-bar button:hover {
+  background-color: #e8f0fe;
+}
+
+/* Class injected by the content script to highlight links */
+.cs-sample-highlight {
+  outline: 2px solid #fbbc04 !important;
+  background-color: #fff8e1 !important;
+}

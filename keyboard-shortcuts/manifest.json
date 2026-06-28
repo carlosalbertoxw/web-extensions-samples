@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Keyboard shortcuts",
+  "version": "1.0.0",
+  "description": "Run actions with a keyboard shortcut using chrome.commands.",
+  "permissions": [
+    "notifications"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "show-message": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "Show a notification"
+    }
+  },
+  "action": {
+    "default_title": "Settings",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  }
+}

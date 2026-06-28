@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body {
+      width: 300px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    button {
+      margin: 4px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    #status {
+      font-size: 13px;
+      min-height: 18px;
+      color: #1a73e8;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Alarms</h1>
+  <p>Schedule a reminder notification. You can close the popup and even the
+    browser window; the alarm still fires.</p>
+  <button id="start">Remind me in 1 minute</button>
+  <button id="cancel">Cancel</button>
+  <p id="status"></p>
+  <script src="popup.js"></script>
+</body>
+
+</html>
