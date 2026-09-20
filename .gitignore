@@ -1,0 +1,16 @@
+# Artifacts Chrome generates inside an unpacked extension when it is loaded
+_metadata/
+
+# Packaged extensions
+*.zip
+*.crx
+*.pem
+
+# Dependencies
+node_modules/
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,10 @@
+{
+  "name": "web-extensions-samples",
+  "version": "1.0.0",
+  "description": "Basic examples of useful functionalities for web extension development.",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "validate": "node scripts/validate.js"
+  }
+}

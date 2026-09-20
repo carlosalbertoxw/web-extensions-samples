@@ -1,0 +1,4 @@
+# Normalize line endings so .editorconfig (end_of_line = lf) is actually enforced.
+* text=auto eol=lf
+
+*.png binary
