@@ -17,15 +17,29 @@ document.getElementById("analyze").addEventListener("click", () => {
         return;
       }
 
-      result.innerHTML = `
-        <strong>${response.title}</strong><br>
-        Links: ${response.links}<br>
-        Images: ${response.images}<br>
-        Paragraphs: ${response.paragraphs}
-      `;
+      render(result, response);
 
       // Also notify the background service worker (popup -> background).
       chrome.runtime.sendMessage({ action: "analysisDone" });
     });
   });
 });
+
+// The response comes from the visited page, so it is untrusted input. Building
+// the output with innerHTML would let a page choose the markup that runs inside
+// the extension; createElement + textContent cannot be escaped out of.
+function render(container, response) {
+  container.replaceChildren();
+
+  const title = document.createElement("strong");
+  title.textContent = response.title;
+  container.append(title);
+
+  for (const [label, value] of [
+    ["Links", response.links],
+    ["Images", response.images],
+    ["Paragraphs", response.paragraphs],
+  ]) {
+    container.append(document.createElement("br"), `${label}: ${value}`);
+  }
+}

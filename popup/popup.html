@@ -1,23 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
+  <title>Popup</title>
   <style>
     body {
       width: 300px;
       font-family: Arial, sans-serif;
       text-align: center;
     }
+
+    #status {
+      font-size: 13px;
+      min-height: 18px;
+      color: #1a73e8;
+    }
   </style>
 </head>
 
 <body>
   <h1>Settings</h1>
+  <p>The popup closes as soon as it loses focus, so the checkbox is saved to
+    <code>chrome.storage.local</code> on every change and restored on reopen.</p>
   <label>
     <input type="checkbox" id="someSetting" />
     Some setting
   </label>
+  <p id="status"></p>
   <script src="popup.js"></script>
 </body>
 

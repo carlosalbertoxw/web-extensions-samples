@@ -1,20 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
+  <title>Custom notification</title>
   <style>
     body {
       width: 300px;
       font-family: Arial, sans-serif;
       text-align: center;
     }
+
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
 <body>
-  <h1>Settings</h1>
-  <button id="clickMe">Click me</button>
+  <h1>Custom notification</h1>
+  <p>Shows an extension window instead of a native notification, so its content
+    is plain HTML you control.</p>
+  <button id="clickMe">Show notification</button>
   <script src="popup.js"></script>
 </body>
 

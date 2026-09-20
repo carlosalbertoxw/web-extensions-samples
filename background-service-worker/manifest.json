@@ -3,6 +3,7 @@
   "name": "Background service worker",
   "version": "1.0.0",
   "description": "A service worker reacts to browser lifecycle and tab events, keeping state in storage.",
+  "minimum_chrome_version": "88",
   "permissions": [
     "storage"
   ],

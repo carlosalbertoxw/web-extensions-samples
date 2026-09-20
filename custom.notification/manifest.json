@@ -2,7 +2,11 @@
   "manifest_version": 3,
   "name": "Custom notification",
   "version": "1.0.0",
-  "description": "Show a custom notification.",
+  "description": "Show a custom notification in an extension window instead of a native one.",
+  "minimum_chrome_version": "88",
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_title": "Settings",
     "default_popup": "popup.html"

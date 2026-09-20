@@ -3,6 +3,10 @@
   "name": "Popup",
   "version": "1.0.0",
   "description": "Displays a popup by clicking the extension icon.",
+  "minimum_chrome_version": "88",
+  "permissions": [
+    "storage"
+  ],
   "action": {
     "default_title": "Settings",
     "default_popup": "popup.html"
