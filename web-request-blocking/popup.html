@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
+  <title>Web request blocking</title>
   <style>
     body {
       width: 320px;
@@ -20,10 +21,12 @@
 
 <body>
   <h1>Web request blocking</h1>
-  <p>This extension uses a declarative rule to <strong>redirect</strong> network
-    requests without intercepting them in JavaScript.</p>
-  <p>Try visiting <code>http://example.com</code>: you will be sent to the Chrome
-    extensions documentation instead.</p>
+  <p>This extension uses declarative rules to act on network requests without
+    intercepting them in JavaScript.</p>
+  <p><strong>Redirect:</strong> visit <code>http://example.com</code> and you are
+    sent to the Chrome extensions documentation instead.</p>
+  <p><strong>Block:</strong> visit <code>http://example.org</code> and the request
+    is cancelled outright.</p>
 </body>
 
 </html>

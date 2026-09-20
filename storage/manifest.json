@@ -3,6 +3,7 @@
   "name": "Save in local storage",
   "version": "1.0.0",
   "description": "Saves data persistently to local storage",
+  "minimum_chrome_version": "88",
   "permissions": [
     "storage"
   ],

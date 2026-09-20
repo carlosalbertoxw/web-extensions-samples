@@ -3,6 +3,7 @@
   "name": "Tabs",
   "version": "1.0.0",
   "description": "List the open tabs and open a new one using chrome.tabs.",
+  "minimum_chrome_version": "88",
   "permissions": [
     "tabs"
   ],

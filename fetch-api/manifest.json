@@ -3,6 +3,7 @@
   "name": "Fetch API",
   "version": "1.0.0",
   "description": "Call an external API and show the result in the popup.",
+  "minimum_chrome_version": "88",
   "host_permissions": [
     "https://dog.ceo/*"
   ],

@@ -3,6 +3,7 @@
   "name": "Notification",
   "version": "1.0.0",
   "description": "Show a notification.",
+  "minimum_chrome_version": "88",
   "permissions": [
     "notifications"
   ],

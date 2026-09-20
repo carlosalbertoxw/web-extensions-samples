@@ -3,12 +3,17 @@
   "name": "Context menu",
   "version": "1.0.0",
   "description": "Adds options to the right-click context menu.",
+  "minimum_chrome_version": "88",
   "permissions": [
     "contextMenus",
     "notifications"
   ],
   "background": {
     "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Context menu",
+    "default_popup": "popup.html"
   },
   "icons": {
     "16": "images/icon-16.png",

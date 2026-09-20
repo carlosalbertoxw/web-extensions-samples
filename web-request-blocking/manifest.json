@@ -3,11 +3,13 @@
   "name": "Web request blocking",
   "version": "1.0.0",
   "description": "Block or redirect network requests with declarativeNetRequest.",
+  "minimum_chrome_version": "88",
   "permissions": [
     "declarativeNetRequest"
   ],
   "host_permissions": [
-    "*://example.com/*"
+    "*://example.com/*",
+    "*://example.org/*"
   ],
   "declarative_net_request": {
     "rule_resources": [

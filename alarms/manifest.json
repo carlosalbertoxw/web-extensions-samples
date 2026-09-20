@@ -3,6 +3,7 @@
   "name": "Alarms",
   "version": "1.0.0",
   "description": "Schedule tasks with chrome.alarms (the MV3 replacement for setInterval).",
+  "minimum_chrome_version": "88",
   "permissions": [
     "alarms",
     "notifications"

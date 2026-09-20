@@ -3,6 +3,7 @@
   "name": "Side panel",
   "version": "1.0.0",
   "description": "Show a persistent UI in the browser side panel with chrome.sidePanel.",
+  "minimum_chrome_version": "114",
   "permissions": [
     "sidePanel"
   ],

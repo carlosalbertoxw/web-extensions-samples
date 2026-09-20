@@ -3,6 +3,7 @@
   "name": "Options page",
   "version": "1.0.0",
   "description": "A dedicated options page that saves preferences with chrome.storage.sync.",
+  "minimum_chrome_version": "88",
   "permissions": [
     "storage"
   ],

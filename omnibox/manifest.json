@@ -3,11 +3,12 @@
   "name": "Omnibox",
   "version": "1.0.0",
   "description": "Add a keyword to the address bar with chrome.omnibox.",
-  "omnibox": {
-    "keyword": "ext"
-  },
+  "minimum_chrome_version": "88",
   "background": {
     "service_worker": "background.js"
+  },
+  "omnibox": {
+    "keyword": "ext"
   },
   "icons": {
     "16": "images/icon-16.png",

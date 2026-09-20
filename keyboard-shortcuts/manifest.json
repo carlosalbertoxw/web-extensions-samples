@@ -3,6 +3,7 @@
   "name": "Keyboard shortcuts",
   "version": "1.0.0",
   "description": "Run actions with a keyboard shortcut using chrome.commands.",
+  "minimum_chrome_version": "88",
   "permissions": [
     "notifications"
   ],
@@ -12,7 +13,8 @@
   "commands": {
     "show-message": {
       "suggested_key": {
-        "default": "Ctrl+Shift+Y"
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
       },
       "description": "Show a notification"
     }
