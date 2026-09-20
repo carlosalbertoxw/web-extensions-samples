@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Identity</title>
+  <style>
+    body {
+      width: 320px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    dl {
+      text-align: left;
+      font-size: 13px;
+    }
+
+    dt {
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    dd {
+      margin: 2px 0 0;
+      font-family: monospace;
+      word-break: break-all;
+    }
+
+    #status {
+      font-size: 13px;
+      min-height: 18px;
+      color: #1a73e8;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Identity</h1>
+  <p>Reads the account signed into this Chrome profile. No OAuth setup needed.</p>
+  <dl>
+    <dt>Email</dt>
+    <dd id="email">-</dd>
+    <dt>Account id</dt>
+    <dd id="id">-</dd>
+  </dl>
+  <p id="status">Loading...</p>
+  <script src="popup.js"></script>
+</body>
+
+</html>

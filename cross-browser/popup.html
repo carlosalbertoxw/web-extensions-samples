@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Cross-browser</title>
+  <style>
+    body {
+      width: 320px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .value {
+      font-size: 1.6em;
+      font-weight: bold;
+      color: #1a73e8;
+    }
+
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Cross-browser</h1>
+  <p>The same files run on Chrome, Opera and Firefox through a small API shim.</p>
+  <p>Running on: <span class="value" id="engine">-</span></p>
+  <p>Counter: <span class="value" id="count">0</span></p>
+  <button id="increment">Increment</button>
+  <!-- type="module" is required: popup.js uses import and top-level await. -->
+  <script type="module" src="popup.js"></script>
+</body>
+
+</html>

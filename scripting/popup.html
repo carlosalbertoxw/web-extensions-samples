@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Scripting</title>
+  <style>
+    body {
+      width: 300px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    button {
+      margin: 4px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    #status {
+      font-size: 13px;
+      min-height: 18px;
+      color: #1a73e8;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Scripting</h1>
+  <p>Injects code into the current tab only when you ask, using
+    <code>activeTab</code> instead of broad host permissions.</p>
+  <button id="count">Count links in the page</button>
+  <button id="toggleCss">Toggle injected CSS</button>
+  <p id="status"></p>
+  <script src="popup.js"></script>
+</body>
+
+</html>
