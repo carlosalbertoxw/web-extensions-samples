@@ -18,10 +18,23 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
   suggest(suggestions);
 });
 
-// Handle the final input when the user presses Enter.
-chrome.omnibox.onInputEntered.addListener((text) => {
+// Handle the final input when the user presses Enter. The second argument says
+// how the user asked for it to open: plain Enter reuses the current tab, but
+// Ctrl/Cmd+Enter and Alt+Enter ask for a new tab, and ignoring that makes the
+// extension feel broken.
+chrome.omnibox.onInputEntered.addListener((text, disposition) => {
   const url = SITES[text.toLowerCase()] || `https://www.google.com/search?q=${encodeURIComponent(text)}`;
-  chrome.tabs.update({ url });
+
+  switch (disposition) {
+    case "newForegroundTab":
+      chrome.tabs.create({ url, active: true });
+      break;
+    case "newBackgroundTab":
+      chrome.tabs.create({ url, active: false });
+      break;
+    default:
+      chrome.tabs.update({ url });
+  }
 });
 
 // Hint shown when the keyword is active.

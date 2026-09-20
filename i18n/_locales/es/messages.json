@@ -10,5 +10,9 @@
   "greeting": {
     "message": "¡Hola! Este texto se adapta al idioma de tu navegador.",
     "description": "Greeting shown in the popup."
+  },
+  "languageLabel": {
+    "message": "Idioma del navegador:",
+    "description": "Label before the detected UI language."
   }
 }

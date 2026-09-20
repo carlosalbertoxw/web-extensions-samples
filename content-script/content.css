@@ -33,6 +33,12 @@
   background-color: #e8f0fe;
 }
 
+/* Cancels the page-wide invert() filter so the bar keeps its own colors
+   while "dark mode" is on. */
+#cs-sample-bar.cs-sample-inverted {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 /* Class injected by the content script to highlight links */
 .cs-sample-highlight {
   outline: 2px solid #fbbc04 !important;

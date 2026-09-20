@@ -28,11 +28,14 @@
     });
   });
 
-  // Invert the page colors as a quick "dark mode" demonstration.
+  // Invert the page colors as a quick "dark mode" demonstration. The filter is
+  // applied to the root element, so it would invert this bar too; the
+  // "cs-sample-inverted" class applies the opposite filter to cancel it out.
   let dark = false;
   document.getElementById("cs-darkmode").addEventListener("click", () => {
     dark = !dark;
     document.documentElement.style.filter = dark ? "invert(1) hue-rotate(180deg)" : "";
+    bar.classList.toggle("cs-sample-inverted", dark);
   });
 
   document.getElementById("cs-close").addEventListener("click", () => {

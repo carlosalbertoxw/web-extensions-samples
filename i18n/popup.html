@@ -1,20 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
+  <title>Internationalization</title>
   <style>
     body {
       width: 300px;
       font-family: Arial, sans-serif;
       text-align: center;
     }
+
+    #language {
+      font-family: monospace;
+      background-color: #eee;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
   </style>
 </head>
 
 <body>
-  <h1 id="title"></h1>
-  <p id="greeting"></p>
+  <h1 data-i18n="extName"></h1>
+  <p data-i18n="greeting"></p>
+  <p><small data-i18n="languageLabel"></small> <span id="language"></span></p>
   <script src="popup.js"></script>
 </body>
 
