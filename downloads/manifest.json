@@ -3,7 +3,7 @@
   "name": "Downloads",
   "version": "1.0.0",
   "description": "Start downloads and inspect their progress with chrome.downloads.",
-  "minimum_chrome_version": "88",
+  "minimum_chrome_version": "96",
   "permissions": [
     "downloads"
   ],

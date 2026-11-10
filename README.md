@@ -4,13 +4,22 @@
 
 This repository contains basic examples of how to implement useful functionalities for the development of web extensions.
 
-Every folder is a standalone Manifest V3 extension that demonstrates a single feature, with no build step and no dependencies: load the folder and it runs.
+Every example folder is a standalone Manifest V3 extension that demonstrates a single feature, with no build step and no dependencies: load the folder and it runs. The only other folders are `scripts/`, which holds the validator, and `.github/`.
 
-The structure used in these examples is based on Chrome for Developers documentation.
+The structure used in these examples is based on the Chrome for Developers documentation. For further documentation, start with the [Hello World tutorial](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world) and the [API reference](https://developer.chrome.com/docs/extensions/reference/api).
 
-For further documentation, please refer to the following link:
+### Inside an example
 
-https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/
+Each folder uses the same file names, so they are easy to compare:
+
+| File | Role |
+| --- | --- |
+| `manifest.json` | Declares the extension, its permissions and the minimum Chrome version its APIs need. |
+| `background.js` | The service worker: reacts to browser events with no UI of its own. |
+| `popup.html` / `popup.js` | The page shown when clicking the toolbar icon. |
+| `images/` | The 16, 32, 48 and 128 px icons. |
+
+Pages that only some examples have (`options.html`, `sidepanel.html`, `offscreen.html`, `content.js`...) are named after the surface they implement. Every JavaScript file opens with a comment that explains what it shows and why it is written that way.
 
 ## Motivation
 
@@ -18,22 +27,22 @@ I have created this repository to store basic examples of useful functionalities
 
 ## Technologies
 
-- Javascript
+- JavaScript
 - HTML
 - CSS
 
 ## Browser support
 
-The examples target **Chrome and Opera**, which share the same extension engine.
+The examples target **Chrome, Edge and Opera**, which share the Chromium extension engine. Every API call uses promises, and each `manifest.json` declares the `minimum_chrome_version` its APIs need.
 
 **Firefox is not drop-in compatible.** Its Manifest V3 implementation differs in ways that stop most of these folders from loading as they are:
 
 - `background.service_worker` is ignored; Firefox expects `background.scripts`.
 - `browser_specific_settings.gecko.id` is required.
-- APIs live under the `browser` namespace and return promises instead of taking callbacks.
+- Its own namespace is `browser`. Firefox also defines `chrome` as an alias, so the promise-based calls used here run as they are, but neither name can be used to detect the engine.
 - `chrome.sidePanel` does not exist (Firefox uses `sidebar_action`), and `chrome.offscreen` and `chrome.identity.getProfileUserInfo` have no equivalent.
 
-The [cross-browser](cross-browser/) example shows the manifest layout and the API shim that make one codebase run on all three.
+The [cross-browser](cross-browser/) example shows the manifest layout and the small module that make one codebase run on all of them.
 
 ## Examples
 
@@ -84,13 +93,13 @@ The [cross-browser](cross-browser/) example shows the manifest layout and the AP
 | Example | What it shows |
 | --- | --- |
 | [notification](notification/) | Show a native system notification. |
-| [custom.notification](custom.notification/) | Show a custom HTML notification window. |
+| [custom-notification](custom-notification/) | Show a custom HTML notification window. |
 | [i18n](i18n/) | Translate the extension with `_locales` and `chrome.i18n`. |
-| [cross-browser](cross-browser/) | One codebase that runs on Chrome, Opera and Firefox. |
+| [cross-browser](cross-browser/) | One codebase that runs on Chromium browsers and Firefox. |
 
 ## How to load an example
 
-1. Open `chrome://extensions` in Chrome (or `opera://extensions`).
+1. Open `chrome://extensions` in Chrome (`edge://extensions` in Edge, `opera://extensions` in Opera).
 2. Enable **Developer mode**.
 3. Click **Load unpacked** and select the folder of the example you want to try.
 
@@ -98,13 +107,13 @@ To load an example in Firefox, open `about:debugging#/runtime/this-firefox` and 
 
 ## Validating the examples
 
-A dependency-free script checks every folder: that each `manifest.json` parses and declares MV3, that every file it references exists, that pages carry no inline scripts (which the MV3 CSP blocks), and that no JavaScript file was left empty.
+A dependency-free script checks every folder: that each `manifest.json` parses and declares MV3, that every file it references exists, that pages carry no inline scripts (which the MV3 CSP blocks), that every JavaScript file compiles, and that code using `chrome.action` finds an `action` key in its manifest. It needs Node 22 or later.
 
 ```bash
 npm run validate
 ```
 
-It runs on every push and pull request through GitHub Actions.
+It runs on every push and pull request through GitHub Actions, together with a CodeQL analysis. Dependabot proposes updates to the workflow actions once a month.
 
 ## License
 

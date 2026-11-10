@@ -4,8 +4,8 @@
 chrome.runtime.onInstalled.addListener(() => {
   // Shown only when the user right-clicks selected text.
   chrome.contextMenus.create({
-    id: "countLetters",
-    title: 'Count letters in "%s"',
+    id: "countCharacters",
+    title: 'Count characters in "%s"',
     contexts: ["selection"],
   });
 
@@ -18,9 +18,9 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.contextMenus.onClicked.addListener((info) => {
-  if (info.menuItemId === "countLetters") {
+  if (info.menuItemId === "countCharacters") {
     const text = info.selectionText || "";
-    notify("Letters selected", `"${text}" has ${text.length} characters.`);
+    notify("Characters selected", `"${text}" has ${text.length} characters.`);
   }
 
   if (info.menuItemId === "sayHello") {

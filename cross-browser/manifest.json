@@ -3,7 +3,7 @@
   "name": "Cross-browser",
   "version": "1.0.0",
   "description": "One codebase that runs on Chrome, Opera and Firefox.",
-  "minimum_chrome_version": "92",
+  "minimum_chrome_version": "121",
   "browser_specific_settings": {
     "gecko": {
       "id": "cross-browser@web-extensions-samples",

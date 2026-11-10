@@ -5,7 +5,7 @@
   "description": "Show and update text over the toolbar icon with chrome.action.setBadgeText.",
   "minimum_chrome_version": "88",
   "action": {
-    "default_title": "Settings",
+    "default_title": "Badge",
     "default_popup": "popup.html"
   },
   "icons": {

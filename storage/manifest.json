@@ -1,14 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Save in local storage",
+  "name": "Storage",
   "version": "1.0.0",
-  "description": "Saves data persistently to local storage",
+  "description": "Save data persistently with chrome.storage.local.",
   "minimum_chrome_version": "88",
   "permissions": [
     "storage"
   ],
   "action": {
-    "default_title": "Settings",
+    "default_title": "Storage",
     "default_popup": "popup.html"
   },
   "icons": {

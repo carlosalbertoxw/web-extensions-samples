@@ -8,12 +8,8 @@
 // the worker being suspended and is cleared when the browser closes.
 const COUNTER_KEY = "analysisCount";
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.action.setBadgeBackgroundColor({ color: "#34a853" });
-});
-
-// setBadgeBackgroundColor has to be re-applied on every worker start, because
-// onInstalled only fires once.
+// Top-level code runs every time the worker starts, which covers both a fresh
+// install and a browser restart. The call is cheap and idempotent.
 chrome.action.setBadgeBackgroundColor({ color: "#34a853" });
 
 chrome.runtime.onMessage.addListener((message) => {

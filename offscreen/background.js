@@ -15,26 +15,40 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 
   if (message.action === "parseHtml") {
-    parseHtml(message.html).then(sendResponse);
+    // Always answer, even on failure, or the popup would wait forever.
+    parseHtml(message.html).then(sendResponse, (error) =>
+      sendResponse({ error: error.message })
+    );
     return true; // Keep the message channel open for the async reply.
   }
 });
 
+// Several requests can overlap (two quick clicks). The document is closed only
+// when the last one finishes, so no request loses it halfway through.
+let inFlight = 0;
+
 async function parseHtml(html) {
-  await ensureOffscreenDocument();
+  inFlight += 1;
+  try {
+    await ensureOffscreenDocument();
 
-  // The message is broadcast to every extension context, so the offscreen
-  // document filters on `target` and the listener above ignores it in turn.
-  const stats = await chrome.runtime.sendMessage({
-    target: "offscreen",
-    action: "parseHtml",
-    html,
-  });
-
-  // Close it again: an open offscreen document keeps the worker alive and
-  // consumes memory for as long as it exists.
-  await chrome.offscreen.closeDocument();
-  return stats;
+    // The message is broadcast to every extension context, so the offscreen
+    // document filters on `target` and the listener above ignores it in turn.
+    return await chrome.runtime.sendMessage({
+      target: "offscreen",
+      action: "parseHtml",
+      html,
+    });
+  } finally {
+    inFlight -= 1;
+    // Close it again: an open offscreen document keeps the worker alive and
+    // consumes memory for as long as it exists.
+    if (inFlight === 0) {
+      await chrome.offscreen.closeDocument().catch(() => {
+        // Nothing to close if creating it had failed.
+      });
+    }
+  }
 }
 
 // Creating a document that already exists throws, and two calls arriving at

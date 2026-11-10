@@ -3,7 +3,7 @@
   "name": "Keyboard shortcuts",
   "version": "1.0.0",
   "description": "Run actions with a keyboard shortcut using chrome.commands.",
-  "minimum_chrome_version": "88",
+  "minimum_chrome_version": "96",
   "permissions": [
     "notifications"
   ],
@@ -20,7 +20,7 @@
     }
   },
   "action": {
-    "default_title": "Settings",
+    "default_title": "Keyboard shortcuts",
     "default_popup": "popup.html"
   },
   "icons": {

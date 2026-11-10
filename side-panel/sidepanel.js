@@ -4,13 +4,15 @@
 const notes = document.getElementById("notes");
 const status = document.getElementById("status");
 
-chrome.storage.local.get("sidePanelNotes", (result) => {
-  notes.value = result.sidePanelNotes || "";
+async function loadNotes() {
+  const { sidePanelNotes } = await chrome.storage.local.get({ sidePanelNotes: "" });
+  notes.value = sidePanelNotes;
+}
+
+document.getElementById("save").addEventListener("click", async () => {
+  await chrome.storage.local.set({ sidePanelNotes: notes.value });
+  status.textContent = "Notes saved.";
+  setTimeout(() => (status.textContent = ""), 1500);
 });
 
-document.getElementById("save").addEventListener("click", () => {
-  chrome.storage.local.set({ sidePanelNotes: notes.value }, () => {
-    status.textContent = "Notes saved.";
-    setTimeout(() => (status.textContent = ""), 1500);
-  });
-});
+loadNotes();

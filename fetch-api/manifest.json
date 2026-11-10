@@ -3,12 +3,12 @@
   "name": "Fetch API",
   "version": "1.0.0",
   "description": "Call an external API and show the result in the popup.",
-  "minimum_chrome_version": "88",
+  "minimum_chrome_version": "103",
   "host_permissions": [
     "https://dog.ceo/*"
   ],
   "action": {
-    "default_title": "Settings",
+    "default_title": "Fetch API",
     "default_popup": "popup.html"
   },
   "icons": {

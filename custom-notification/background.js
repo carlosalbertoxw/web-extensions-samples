@@ -28,7 +28,7 @@ async function showCustomNotification() {
   const top = Math.max(0, (current.top || 0) + (current.height || 0) - WINDOW_HEIGHT - 40);
 
   const created = await chrome.windows.create({
-    url: "custom_notification.html",
+    url: "notification.html",
     type: "popup",
     focused: false,
     width: WINDOW_WIDTH,

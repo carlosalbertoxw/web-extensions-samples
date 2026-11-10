@@ -4,6 +4,9 @@
   "description": "Basic examples of useful functionalities for web extension development.",
   "private": true,
   "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "validate": "node scripts/validate.js"
   }

@@ -8,7 +8,7 @@
     "tabs"
   ],
   "action": {
-    "default_title": "Settings",
+    "default_title": "Tabs",
     "default_popup": "popup.html"
   },
   "icons": {

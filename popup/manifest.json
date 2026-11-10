@@ -8,7 +8,7 @@
     "storage"
   ],
   "action": {
-    "default_title": "Settings",
+    "default_title": "Popup",
     "default_popup": "popup.html"
   },
   "icons": {

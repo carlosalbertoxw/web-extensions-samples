@@ -9,7 +9,7 @@
       }
     },
     "condition": {
-      "urlFilter": "||example.com",
+      "requestDomains": ["example.com"],
       "resourceTypes": ["main_frame"]
     }
   },
@@ -20,7 +20,7 @@
       "type": "block"
     },
     "condition": {
-      "urlFilter": "||example.org",
+      "requestDomains": ["example.org"],
       "resourceTypes": ["main_frame"]
     }
   }

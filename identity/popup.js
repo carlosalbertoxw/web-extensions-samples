@@ -12,7 +12,9 @@ const status = document.getElementById("status");
 
 // "identity.email" is what makes the email field non-empty; with only
 // "identity" the object comes back with blank strings.
-chrome.identity.getProfileUserInfo({ accountStatus: "ANY" }, (info) => {
+async function showProfile() {
+  const info = await chrome.identity.getProfileUserInfo({ accountStatus: "ANY" });
+
   if (!info.email) {
     status.textContent = "No account is signed into this Chrome profile.";
     return;
@@ -20,7 +22,9 @@ chrome.identity.getProfileUserInfo({ accountStatus: "ANY" }, (info) => {
   email.textContent = info.email;
   id.textContent = info.id;
   status.textContent = "";
-});
+}
+
+showProfile();
 
 // --- OAuth reference (not executed) --------------------------------------
 //

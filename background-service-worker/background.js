@@ -15,7 +15,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
   // if the counter had not been initialised yet that first tab would be counted
   // against an empty store and then overwritten by this set().
   await chrome.storage.local.set({
-    installedAt: new Date().toLocaleString(),
+    installedAt: Date.now(), // A timestamp; the popup formats it for display.
     tabsOpened: 0,
   });
 

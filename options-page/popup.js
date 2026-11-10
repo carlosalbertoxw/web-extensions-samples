@@ -3,12 +3,15 @@
 
 const summary = document.getElementById("summary");
 
-chrome.storage.sync.get({ theme: "light", notifications: false }, (items) => {
+async function showSummary() {
+  const items = await chrome.storage.sync.get({ theme: "light", notifications: false });
   summary.textContent = `Theme: ${items.theme} · Notifications: ${
     items.notifications ? "on" : "off"
   }`;
-});
+}
 
 document.getElementById("openOptions").addEventListener("click", () => {
   chrome.runtime.openOptionsPage();
 });
+
+showSummary();

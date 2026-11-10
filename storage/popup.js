@@ -12,7 +12,10 @@ function render(value) {
 }
 
 // get: read the stored value when the popup opens.
-chrome.storage.local.get("note", (result) => render(result.note));
+async function load() {
+  const { note } = await chrome.storage.local.get("note");
+  render(note);
+}
 
 // onChanged: fires whenever a value changes, from anywhere in the extension,
 // so the UI never has to be refreshed manually.
@@ -32,3 +35,5 @@ document.getElementById("remove").addEventListener("click", () => {
   chrome.storage.local.remove("note");
   input.value = "";
 });
+
+load();

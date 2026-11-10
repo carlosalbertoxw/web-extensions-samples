@@ -5,20 +5,18 @@
 // This is the right shape for an extension whose whole job is one toggle —
 // there is nothing to put in a popup, so clicking the icon just does the thing.
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.action.setBadgeBackgroundColor({ color: "#1a73e8" });
-});
+// Top-level code runs every time the worker starts, which covers both a fresh
+// install and a browser restart. The call is cheap and idempotent.
+chrome.action.setBadgeBackgroundColor({ color: "#1a73e8" });
 
 chrome.action.onClicked.addListener(async (tab) => {
   // Clicking the icon is what grants "activeTab" access to this tab, so the
   // extension needs no host permissions to touch the page below.
-  const enabled = await toggleStateFor(tab.id);
-
+  let results;
   try {
-    await chrome.scripting.executeScript({
+    results = await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      func: applyReadingMode,
-      args: [enabled],
+      func: toggleReadingMode,
     });
   } catch (error) {
     // chrome:// pages and the Web Store reject injection.
@@ -26,32 +24,31 @@ chrome.action.onClicked.addListener(async (tab) => {
     return;
   }
 
+  // The page itself is the source of truth: the injected function reports
+  // whether the mode ended up on or off. A separate copy of that state kept
+  // in the extension would drift as soon as the page reloads or navigates.
+  const enabled = results[0].result;
+
   // The badge is per-tab, so each tab shows its own state.
   await chrome.action.setBadgeText({ tabId: tab.id, text: enabled ? "ON" : "" });
 });
 
-// Per-tab state lives in storage.session: it must survive the worker being
-// suspended, but it is meaningless once the browser closes.
-async function toggleStateFor(tabId) {
-  const key = `readingMode:${tabId}`;
-  const stored = await chrome.storage.session.get({ [key]: false });
-  const enabled = !stored[key];
-  await chrome.storage.session.set({ [key]: enabled });
-  return enabled;
-}
-
-// Forget a tab's state when it goes away, so the keys do not pile up.
-chrome.tabs.onRemoved.addListener((tabId) => {
-  chrome.storage.session.remove(`readingMode:${tabId}`);
+// A tab-specific badge only resets when the tab closes, but the injected style
+// is gone as soon as the tab loads a new page. Clear the badge to match.
+chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+  if (changeInfo.status === "loading") {
+    chrome.action.setBadgeText({ tabId, text: "" });
+  }
 });
 
-// Runs inside the page, not here.
-function applyReadingMode(enabled) {
+// Runs inside the page, not here. Returns the new state.
+function toggleReadingMode() {
   const id = "action-onclicked-reading-mode";
-  document.getElementById(id)?.remove();
+  const existing = document.getElementById(id);
 
-  if (!enabled) {
-    return;
+  if (existing) {
+    existing.remove();
+    return false;
   }
 
   const style = document.createElement("style");
@@ -64,5 +61,6 @@ function applyReadingMode(enabled) {
       line-height: 1.7 !important;
       background: #fbf8f1 !important;
     }`;
-  document.head.append(style);
+  (document.head ?? document.documentElement).append(style);
+  return true;
 }

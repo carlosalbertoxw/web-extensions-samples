@@ -4,8 +4,9 @@
 // disconnects.
 //
 // Ports are the right tool when the worker has to *stream* something back, or
-// when a conversation has several steps. They also keep the service worker
-// alive while they are open, which is the only supported way to do so.
+// when a conversation has several steps. Since Chrome 114 every message sent
+// over a port also resets the worker's idle timer, so the ticker below keeps
+// the worker running for as long as the popup stays open.
 
 chrome.runtime.onConnect.addListener((port) => {
   if (port.name !== "ticker") {

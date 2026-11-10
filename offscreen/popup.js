@@ -13,19 +13,30 @@ const SAMPLE_HTML = `
   </html>`;
 
 const result = document.getElementById("result");
+const parseButton = document.getElementById("parse");
 
-document.getElementById("parse").addEventListener("click", async () => {
+parseButton.addEventListener("click", async () => {
   result.textContent = "Parsing...";
+  parseButton.disabled = true;
 
-  const stats = await chrome.runtime.sendMessage({
-    action: "parseHtml",
-    html: SAMPLE_HTML,
-  });
+  try {
+    const stats = await chrome.runtime.sendMessage({
+      action: "parseHtml",
+      html: SAMPLE_HTML,
+    });
+    if (stats.error) {
+      throw new Error(stats.error);
+    }
 
-  result.replaceChildren();
-  for (const [label, value] of Object.entries(stats)) {
-    const line = document.createElement("div");
-    line.textContent = `${label}: ${value}`;
-    result.append(line);
+    result.replaceChildren();
+    for (const [label, value] of Object.entries(stats)) {
+      const line = document.createElement("div");
+      line.textContent = `${label}: ${value}`;
+      result.append(line);
+    }
+  } catch (error) {
+    result.textContent = `Could not parse the document: ${error.message}`;
+  } finally {
+    parseButton.disabled = false;
   }
 });

@@ -2,13 +2,13 @@
   "manifest_version": 3,
   "name": "Notification",
   "version": "1.0.0",
-  "description": "Show a notification.",
+  "description": "Show a native system notification with chrome.notifications.",
   "minimum_chrome_version": "88",
   "permissions": [
     "notifications"
   ],
   "action": {
-    "default_title": "Settings",
+    "default_title": "Notification",
     "default_popup": "popup.html"
   },
   "icons": {

@@ -3,7 +3,7 @@
   "name": "Identity",
   "version": "1.0.0",
   "description": "Read the signed-in Chrome profile with chrome.identity.",
-  "minimum_chrome_version": "88",
+  "minimum_chrome_version": "106",
   "permissions": [
     "identity",
     "identity.email"

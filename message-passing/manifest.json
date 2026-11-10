@@ -21,7 +21,7 @@
     }
   ],
   "action": {
-    "default_title": "Settings",
+    "default_title": "Message passing",
     "default_popup": "popup.html"
   },
   "icons": {

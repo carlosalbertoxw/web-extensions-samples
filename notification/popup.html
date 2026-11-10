@@ -10,12 +10,19 @@
       font-family: Arial, sans-serif;
       text-align: center;
     }
+
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
 <body>
-  <h1>Settings</h1>
-  <button id="clickMe">Click me</button>
+  <h1>Notification</h1>
+  <p>Shows a native system notification with <code>chrome.notifications</code>.
+    The operating system draws it, so it looks like any other notification.</p>
+  <button id="show">Show notification</button>
   <script src="popup.js"></script>
 </body>
 

@@ -3,10 +3,10 @@
   "name": "Bookmarks",
   "version": "1.0.0",
   "description": "Read and create bookmarks with chrome.bookmarks.",
-  "minimum_chrome_version": "88",
+  "minimum_chrome_version": "90",
   "permissions": [
     "bookmarks",
-    "tabs"
+    "activeTab"
   ],
   "action": {
     "default_title": "Bookmarks",

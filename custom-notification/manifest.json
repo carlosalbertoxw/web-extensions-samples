@@ -8,7 +8,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Settings",
+    "default_title": "Custom notification",
     "default_popup": "popup.html"
   },
   "icons": {

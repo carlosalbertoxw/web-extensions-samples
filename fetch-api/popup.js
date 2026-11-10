@@ -12,14 +12,12 @@ async function loadDog() {
   photo.removeAttribute("src");
   loadButton.disabled = true;
 
-  // fetch() has no timeout of its own: without one a hung connection would
-  // leave the popup saying "Loading..." forever.
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-
   try {
+    // fetch() has no timeout of its own: without one a hung connection would
+    // leave the popup saying "Loading..." forever. AbortSignal.timeout aborts
+    // the request with a "TimeoutError" once the time is up.
     const response = await fetch("https://dog.ceo/api/breeds/image/random", {
-      signal: controller.signal,
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });
 
     // fetch only rejects on network errors, so an HTTP 404 or 500 arrives here
@@ -34,12 +32,11 @@ async function loadDog() {
     status.textContent = "";
   } catch (error) {
     status.textContent =
-      error.name === "AbortError"
+      error.name === "TimeoutError"
         ? "The request took too long."
         : "Could not load the image.";
     console.error(error);
   } finally {
-    clearTimeout(timeout);
     loadButton.disabled = false;
   }
 }

@@ -1,13 +1,12 @@
 // chrome.bookmarks exposes the browser's bookmark tree. The "bookmarks"
 // permission is a powerful one — Chrome warns the user about it at install
 // time — so an extension should only ask for it if it really needs the data.
+//
+// Reading the current tab's URL and title needs no "tabs" permission here:
+// opening the popup grants "activeTab", which covers exactly that tab.
 
 const status = document.getElementById("status");
 const list = document.getElementById("list");
-
-// The tree has fixed root folders. "1" is the bookmarks bar and "2" is
-// "Other bookmarks"; new items go there unless a folder is chosen.
-const OTHER_BOOKMARKS_ID = "2";
 
 document.getElementById("add").addEventListener("click", async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -19,8 +18,9 @@ document.getElementById("add").addEventListener("click", async () => {
   }
 
   try {
+    // Without a parentId the bookmark goes to "Other bookmarks". Folder ids are
+    // internal and differ between browsers, so it is better not to hardcode one.
     await chrome.bookmarks.create({
-      parentId: OTHER_BOOKMARKS_ID,
       title: tab.title || tab.url,
       url: tab.url,
     });

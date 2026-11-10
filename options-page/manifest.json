@@ -12,7 +12,7 @@
     "open_in_tab": false
   },
   "action": {
-    "default_title": "Settings",
+    "default_title": "Options page",
     "default_popup": "popup.html"
   },
   "icons": {

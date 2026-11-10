@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 // Validates every example folder without installing any dependency.
 // Checks that each manifest.json parses, that every file it references exists,
-// that the HTML pages only load scripts/styles that are present, and that no
-// JavaScript file was left empty. Run it with: npm run validate
+// that the HTML pages only load scripts/styles that are present, that every
+// JavaScript file is non-empty and free of syntax errors, and that APIs which
+// depend on a manifest key find it. Run it with: npm run validate
 "use strict";
 
 const fs = require("fs");
 const path = require("path");
+const vm = require("vm");
+const { spawnSync } = require("child_process");
 
 const root = path.resolve(__dirname, "..");
 const errors = [];
@@ -178,6 +181,55 @@ function validateLocales(example, dir, manifest) {
   }
 }
 
+function listJsFiles(dir) {
+  return fs
+    .readdirSync(dir, { recursive: true })
+    .filter((file) => path.extname(file) === ".js")
+    .map((file) => file.split(path.sep).join("/"));
+}
+
+// A syntax error only shows up once the example is loaded by hand, so every
+// script is compiled here without being run. Files that use import/export are
+// ES modules and need the module parser, which Node only exposes through its
+// command line (--check reading from stdin).
+function validateSyntax(example, dir, files) {
+  for (const file of files) {
+    const source = fs.readFileSync(path.join(dir, file), "utf8");
+
+    if (/^\s*(import|export)\b/m.test(source)) {
+      const run = spawnSync(process.execPath, ["--input-type=module", "--check"], {
+        input: source,
+        encoding: "utf8",
+      });
+      if (run.status !== 0) {
+        const line = (run.stderr.match(/\[stdin\]:(\d+)/) || [])[1];
+        const reason = run.stderr.split("\n").find((text) => text.startsWith("SyntaxError"));
+        fail(example, `${file}:${line} ${reason || "does not compile"}`);
+      }
+      continue;
+    }
+
+    try {
+      new vm.Script(source, { filename: file });
+    } catch (error) {
+      // The first stack line is "<file>:<line>".
+      fail(example, `${error.stack.split("\n")[0]} ${error.name}: ${error.message}`);
+    }
+  }
+}
+
+// Some APIs only exist, or only fire, depending on what the manifest declares.
+function validateApiUsage(example, dir, files, manifest) {
+  const source = files.map((file) => fs.readFileSync(path.join(dir, file), "utf8")).join("\n");
+
+  if (/chrome\.action\.|openPanelOnActionClick/.test(source) && !manifest.action) {
+    fail(example, 'uses chrome.action, but manifest.json has no "action" key');
+  }
+  if (/action\.onClicked/.test(source) && manifest.action && manifest.action.default_popup) {
+    fail(example, "listens to action.onClicked, which never fires while a default_popup is set");
+  }
+}
+
 const examples = fs
   .readdirSync(root, { withFileTypes: true })
   .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
@@ -192,8 +244,13 @@ for (const example of examples) {
     continue;
   }
   const manifest = validateManifest(example, dir);
+  const jsFiles = listJsFiles(dir);
   validateHtml(example, dir);
   validateLocales(example, dir, manifest);
+  validateSyntax(example, dir, jsFiles);
+  if (manifest) {
+    validateApiUsage(example, dir, jsFiles, manifest);
+  }
 }
 
 for (const warning of warnings) {
